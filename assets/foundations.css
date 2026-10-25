@@ -1,0 +1,14 @@
+.subset-numbers button { min-width: 48px; font-family: monospace; font-size: 20px; }
+.count-number { font-size: clamp(22px, 4.3vw, 34px); overflow-wrap: anywhere; }
+.inset h2 { margin-top: 0; }
+.acronym dt { margin-top: 21px; }
+.protocol-path { list-style: none; padding: 0; counter-reset: path; }
+.protocol-path li { counter-increment: path; padding: 0 0 16px 38px; margin: 0; border-left: 1px solid var(--line); position: relative; }
+.protocol-path li::before { content: counter(path); position: absolute; top: 0; left: -13px; width: 25px; height: 25px; border-radius: 50%; background: var(--panel2); border: 1px solid var(--line); text-align: center; font-size: 13px; }
+.protocol-path { margin-left: 13px; }
+.protocol-path li:last-child { padding-bottom: 0; border-left-color: transparent; }
+.protocol-path p { margin: 5px 0 10px; }
+.visibility-label { margin: 0; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+[data-constraint-lab] input { width: 135px; margin-left: 10px; }
+[data-constraint-lab] .controls > label { display: flex; align-items: center; justify-content: space-between; max-width: 300px; }
+@media print { .protocol-path li::before { background: white; } }

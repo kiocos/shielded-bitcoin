@@ -1,0 +1,1048 @@
+{
+  "schema_version": 1,
+  "title": "Understand Shielded Bitcoin from end to end",
+  "mission": "Explain the full system accurately in a presentation and handle questions about its mechanisms, privacy, assumptions, and open research",
+  "updated": "2026-10-25",
+  "current_module": "F01",
+  "next_action": "All core modules and both optional extensions are available. Start with M01 for the full sequence or resume F01 for the requested proof foundations; adapt review from learner responses",
+  "progress_policy": "Generated material is not completed learning. Update learning_status only from learner evidence, link that evidence in learning-records, and select the next lesson from prerequisites and demonstrated gaps",
+  "session_pattern": "Recall one prior idea without hints; take one short HTML lesson; try a new case with immediate feedback; explain the result; revisit it in a later session",
+  "sources": {
+    "sb": {
+      "title": "Shielded Bitcoin paper",
+      "url": "https://www.allocinit.xyz/posts/Shielded-Bitcoin-paper"
+    },
+    "pipes": {
+      "title": "Bitcoin PIPEs v2",
+      "url": "https://www.allocinit.xyz/posts/Bitcoin-PIPEs-v2-paper"
+    },
+    "aadp": {
+      "title": "AADP witness encryption",
+      "url": "https://www.allocinit.xyz/posts/AADP-WE-paper"
+    },
+    "cook": {
+      "title": "Cook: The P versus NP Problem",
+      "url": "https://www.claymath.org/wp-content/uploads/2022/06/pvsnp.pdf"
+    },
+    "thaler": {
+      "title": "Thaler: Proofs, Arguments, and Zero-Knowledge",
+      "url": "https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf"
+    },
+    "groth": {
+      "title": "Groth: On the Size of Pairing-based Non-interactive Arguments",
+      "url": "https://eprint.iacr.org/2016/260"
+    },
+    "bitcoin": {
+      "title": "Bitcoin Developer Guide: transactions",
+      "url": "https://developer.bitcoin.org/devguide/transactions.html"
+    }
+  },
+  "phases": [
+    {
+      "id": "foundations",
+      "title": "Foundations and the problem",
+      "outcome": "Explain Bitcoin’s public ledger, the proof vocabulary, and who checks each part of Shielded Bitcoin",
+      "checkpoint": "Explain a statement, witness, proof and zk-SNARK in plain English, then assign publication, transfer checks and key release to the correct components",
+      "modules": [
+        {
+          "id": "M01",
+          "title": "Bitcoin’s public ledger",
+          "minutes": 7,
+          "prerequisites": [],
+          "topics": "UTXOs, transaction inputs and outputs, change, signatures, fees, confirmation, and observable payment relationships",
+          "win": "Read a small Bitcoin transaction and separate public facts from ownership guesses",
+          "exercise": "Label the public amounts and links in a payment with change, then identify which ownership claims require extra evidence",
+          "sources": [
+            {
+              "key": "bitcoin",
+              "sections": "Introduction and transaction structure"
+            },
+            {
+              "key": "sb",
+              "sections": "§§1–2",
+              "page": 3
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m01",
+          "materials": [
+            "m01"
+          ]
+        },
+        {
+          "id": "M02",
+          "title": "The cryptographic vocabulary",
+          "minutes": 8,
+          "prerequisites": [
+            "M01"
+          ],
+          "topics": "Hashing, commitments, encryption and signatures; a first distinction between hiding data and proving a claim",
+          "win": "Choose the right primitive for hiding data, committing to data, authorizing a spend, or proving a condition",
+          "exercise": "Assign a primitive to four protocol tasks and explain what each one does not establish",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§3, 5 and 14",
+              "page": 6
+            },
+            {
+              "key": "pipes",
+              "sections": "§2",
+              "page": 7
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m02",
+          "materials": [
+            "m02"
+          ]
+        },
+        {
+          "id": "F01",
+          "title": "Statements, witnesses and checking rules",
+          "minutes": 5,
+          "prerequisites": [],
+          "topics": "Public inputs, claims, witnesses, relations, and the separate proof object",
+          "win": "Describe a claim and its evidence before using cryptographic notation",
+          "exercise": "Construct and check a subset totaling 31, then distinguish a private transfer witness from its public proof",
+          "sources": [
+            {
+              "key": "cook",
+              "sections": "§1",
+              "page": 2
+            },
+            {
+              "key": "sb",
+              "sections": "§14",
+              "page": 22
+            }
+          ],
+          "materials": [
+            "statements"
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "statements"
+        },
+        {
+          "id": "F02",
+          "title": "P, NP and the open question",
+          "minutes": 6,
+          "prerequisites": [
+            "F01"
+          ],
+          "topics": "Decision problems, polynomial time, efficient witness checks, P contained in NP, and what remains unproved",
+          "win": "Explain NP without claiming it means hard or non-polynomial",
+          "exercise": "Compare combinations with checking one witness, and explain why brute-force growth is not a lower bound",
+          "sources": [
+            {
+              "key": "cook",
+              "sections": "§§1–2",
+              "page": 1
+            }
+          ],
+          "materials": [
+            "complexity"
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "complexity"
+        },
+        {
+          "id": "F03",
+          "title": "What zero knowledge adds",
+          "minutes": 5,
+          "prerequisites": [
+            "F01",
+            "F02"
+          ],
+          "topics": "Prover, verifier, completeness, soundness, privacy relative to public inputs, and encryption versus proof",
+          "win": "Explain how proof validity and witness privacy are separate properties",
+          "exercise": "Compare sending private evidence, merely asserting validity, and sending a zero-knowledge proof",
+          "sources": [
+            {
+              "key": "thaler",
+              "sections": "§§3.1–3.2 and 11.1",
+              "page": 171
+            },
+            {
+              "key": "sb",
+              "sections": "§§14 and 20",
+              "page": 22
+            }
+          ],
+          "materials": [
+            "zk"
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "zk"
+        },
+        {
+          "id": "F04",
+          "title": "SNARKs, circuits and constraints",
+          "minutes": 8,
+          "prerequisites": [
+            "F03"
+          ],
+          "topics": "Succinctness, non-interactivity, arguments, knowledge, zk-SNARKs, constraints, Groth16 and trusted setup",
+          "win": "Expand SNARK accurately and explain how payment rules become proof constraints",
+          "exercise": "Check balanced amounts with negative change to discover why balance needs range checks",
+          "sources": [
+            {
+              "key": "groth",
+              "sections": "abstract and construction"
+            },
+            {
+              "key": "sb",
+              "sections": "§17 and Appendices A–B",
+              "page": 26
+            }
+          ],
+          "materials": [
+            "snark"
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "snark"
+        },
+        {
+          "id": "M03",
+          "title": "The complete system map",
+          "minutes": 7,
+          "prerequisites": [
+            "M01",
+            "M02",
+            "F04"
+          ],
+          "topics": "Wallets, Bitcoin publication and ordering, replaying indexers, shielded state, and entry/exit boundaries",
+          "win": "Place each responsibility with the component that performs it",
+          "exercise": "Sort actions among wallet, Bitcoin, indexer and an unspecified peg component",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§1.2, 3–4",
+              "page": 4
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "materials": [
+            "proof-map"
+          ],
+          "primary_material": "proof-map"
+        }
+      ]
+    },
+    {
+      "id": "private-spends",
+      "title": "Build a private spend",
+      "outcome": "Explain how ownership stays private while invalid spending is rejected",
+      "checkpoint": "Explain why ciphertext, a membership proof, and a nullifier are each necessary, then predict a repeated-spend attempt and a forged-nullifier attempt",
+      "modules": [
+        {
+          "id": "M04",
+          "title": "Notes, addresses and encrypted outputs",
+          "minutes": 8,
+          "prerequisites": [
+            "M02",
+            "M03"
+          ],
+          "topics": "The (v, d, rseed) plaintext, recipient addresses, derived per-note values, ciphertexts and public leaves",
+          "win": "Separate a private note from its encrypted representation and its tree leaf",
+          "exercise": "Sort one output’s fields into private, encrypted and public, then identify what a recipient recovers",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§5, 6, 9 and 12",
+              "page": 9
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m04",
+            "notes"
+          ],
+          "evidence": [],
+          "primary_material": "m04"
+        },
+        {
+          "id": "M05",
+          "title": "Merkle membership and one global tree",
+          "minutes": 8,
+          "prerequisites": [
+            "M02",
+            "M04"
+          ],
+          "topics": "Leaves, positions, hashes, Merkle paths, roots, and append-only growth",
+          "win": "Explain what a root and membership path establish without treating membership as proof of an unspent note",
+          "exercise": "Append two outputs to a small tree and trace which hashes and paths change",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§8–9 and Appendix B",
+              "page": 13
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m05",
+            "tree"
+          ],
+          "evidence": [],
+          "primary_material": "m05"
+        },
+        {
+          "id": "M06",
+          "title": "Nullifiers and double-spend prevention",
+          "minutes": 8,
+          "prerequisites": [
+            "M04",
+            "M05"
+          ],
+          "topics": "Nullifier secret, note randomness, canonical position, deterministic derivation and the accepted nullifier set",
+          "win": "Explain why a new transaction or new anchor cannot give the same note a fresh valid spend marker",
+          "exercise": "Predict replay outcomes for a first spend, a repeated marker, and a forged fresh marker",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§9 and §19.2",
+              "page": 15
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m06",
+            "notes"
+          ],
+          "evidence": [],
+          "primary_material": "m06"
+        },
+        {
+          "id": "M07",
+          "title": "What the transfer proof actually proves",
+          "minutes": 10,
+          "prerequisites": [
+            "M02",
+            "M04",
+            "M05",
+            "M06",
+            "F04"
+          ],
+          "topics": "Public inputs, private witness, membership, spend authority, nullifier derivation, output encryption, amount ranges, exact conservation and body binding",
+          "win": "State the proof’s job and distinguish it from checks performed by replay",
+          "exercise": "Break a transfer in several ways and identify the failed constraint or replay rule",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§14 and Appendix B",
+              "page": 22
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m07",
+            "notes",
+            "snark",
+            "proof-map"
+          ],
+          "evidence": [],
+          "primary_material": "m07"
+        }
+      ]
+    },
+    {
+      "id": "replay",
+      "title": "Publish, replay and settle",
+      "outcome": "Follow an entire transfer and reconstruct its effect on shared state",
+      "checkpoint": "Replay a short block sequence with accepted and rejected transfers, keep both indexers consistent, and explain what a reorganization changes",
+      "modules": [
+        {
+          "id": "M08",
+          "title": "Alice pays Bob, end to end",
+          "minutes": 10,
+          "prerequisites": [
+            "M03",
+            "M07"
+          ],
+          "topics": "Synchronize, select notes and anchor, create payment and change, encrypt, prove, publish, replay, detect receipt",
+          "win": "Narrate a payment without confusing wallet intent, Bitcoin confirmation and shielded acceptance",
+          "exercise": "Put shuffled transfer events in order and identify when Bob has an accepted note",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§10 and Appendix C",
+              "page": 16
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m08",
+          "materials": [
+            "m08"
+          ]
+        },
+        {
+          "id": "M09",
+          "title": "Envelope, carrier and body binding",
+          "minutes": 8,
+          "prerequisites": [
+            "M07",
+            "M08"
+          ],
+          "topics": "Canonical encoding, h_body, proof binding, OP_RETURN and witness carriers, policy versus consensus, external Bitcoin fees",
+          "win": "Distinguish the transfer body, proof and carrier transaction, including who pays the fee",
+          "exercise": "Tamper with a body-bound field and explain why the old proof cannot validate the changed envelope",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§11, 13, 22.1 and Appendix A",
+              "page": 17
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m09",
+          "materials": [
+            "m09"
+          ]
+        },
+        {
+          "id": "M10",
+          "title": "Deterministic replay and indexer trust",
+          "minutes": 9,
+          "prerequisites": [
+            "M03",
+            "M05",
+            "M06",
+            "M09"
+          ],
+          "topics": "Parsing, body binding, anchor checks, nullifier checks, proof verification, atomic updates, note tree, nullifier set, root history and accepted history",
+          "win": "Explain why indexers independently reconstruct copies of one logical state and how an unverified response can mislead a wallet",
+          "exercise": "Run two indexers over the same blocks, reject an invalid envelope, and compare their resulting state",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§8, 15, assumption A11 and Appendix A.7",
+              "page": 13
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m10",
+            "tree"
+          ],
+          "evidence": [],
+          "primary_material": "m10"
+        },
+        {
+          "id": "M11",
+          "title": "Anchors, confirmations and reorganizations",
+          "minutes": 9,
+          "prerequisites": [
+            "M05",
+            "M10"
+          ],
+          "topics": "Per-block roots, the valid-root window, minimum depth, wallet confirmation policy, expiration and chain replacement",
+          "win": "Explain why a stale proof may need rebuilding while the underlying note remains recoverable",
+          "exercise": "Classify valid, too-new and expired anchors, then rebuild a transfer after its anchor block is replaced",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§8, 15, 19.1 and Appendix A.6",
+              "page": 13
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m11",
+          "materials": [
+            "m11"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wallets-privacy",
+      "title": "Wallets, recovery and privacy",
+      "outcome": "Explain what users can spend, recover, reveal and still leak",
+      "checkpoint": "Explain recovery after losing a wallet, predict the effects of sharing each capability, and assess a transfer from an observer’s perspective",
+      "modules": [
+        {
+          "id": "M12",
+          "title": "Keys and separate capabilities",
+          "minutes": 8,
+          "prerequisites": [
+            "M04",
+            "M06"
+          ],
+          "topics": "Seed, master key, spending secret, nullifier secret, incoming viewing, outgoing recovery and diversified addresses",
+          "win": "Distinguish spending authority from detection, viewing and nullifier-linking capabilities",
+          "exercise": "Build a capability map and explain the consequences of leaking each key",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§6",
+              "page": 10
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m12",
+          "materials": [
+            "m12"
+          ]
+        },
+        {
+          "id": "M13",
+          "title": "Recovery from seed and history",
+          "minutes": 7,
+          "prerequisites": [
+            "M10",
+            "M12"
+          ],
+          "topics": "Incoming scanning, outgoing recovery, positions, spent status, trusted indexer reliance and bootstrap recovery data",
+          "win": "Describe the data and checks needed to reconstruct spendable wallet state",
+          "exercise": "Recover a small wallet ledger from accepted envelopes and identify what seed-only restoration still depends on",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§1.1 and 16",
+              "page": 23
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m13",
+          "materials": [
+            "m13"
+          ]
+        },
+        {
+          "id": "M14",
+          "title": "Privacy guarantees and metadata",
+          "minutes": 10,
+          "prerequisites": [
+            "M08",
+            "M09",
+            "M11",
+            "M12"
+          ],
+          "topics": "Observer models, amounts and relationships, anonymity sets, timing, arity, anchor age, shared output grouping, fee funding, boundary events and network-scope limits",
+          "win": "Explain why cryptographic hiding does not guarantee an observer cannot infer a payment",
+          "exercise": "Evaluate several transfers with different metadata and justify which candidate inputs can actually be excluded",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§20",
+              "page": 31
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m14",
+          "materials": [
+            "m14"
+          ]
+        },
+        {
+          "id": "M15",
+          "title": "Disclosure and audit claims",
+          "minutes": 7,
+          "prerequisites": [
+            "M12",
+            "M14"
+          ],
+          "topics": "IncomingView, OutgoingView, NoteOpening, DerivedReport, policy scope versus cryptographic scope, and read-only access",
+          "win": "Choose the least revealing evidence for a concrete audit question",
+          "exercise": "Match three audit requests to disclosure methods and explain what each does and does not prove",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§7",
+              "page": 11
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m15",
+          "materials": [
+            "m15"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bitcoin-boundary",
+      "title": "Covenants, witness encryption and PIPEs",
+      "outcome": "Connect the transfer protocol to proposed Bitcoin spending control without overclaiming the peg",
+      "checkpoint": "Explain the three different proof roles, what PIPEs releases, what it does not constrain afterward, and which object has the large size estimate",
+      "modules": [
+        {
+          "id": "M16",
+          "title": "Covenants and transaction restrictions",
+          "minutes": 7,
+          "prerequisites": [
+            "M01",
+            "M02",
+            "M03"
+          ],
+          "topics": "Authorization, output restrictions, transaction templates and conditional key release",
+          "win": "Distinguish permission to sign from restrictions on the transaction being signed",
+          "exercise": "Compare a template-constrained spend with a condition that merely releases an ordinary signing key",
+          "sources": [
+            {
+              "key": "pipes",
+              "sections": "§§1.1–1.3",
+              "page": 3
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m16",
+            "pipes"
+          ],
+          "evidence": [],
+          "primary_material": "m16"
+        },
+        {
+          "id": "M17",
+          "title": "Witness encryption from first principles",
+          "minutes": 9,
+          "prerequisites": [
+            "M02",
+            "M07",
+            "F01",
+            "F04"
+          ],
+          "topics": "Statements, relations, witnesses, message encryption and recovery, a SNARK proof as a witness, and extractable security",
+          "win": "Explain how a condition can control decryption without confusing WE with ordinary note encryption",
+          "exercise": "Construct a simple statement/witness pair, then replace the witness with proof-verification evidence",
+          "sources": [
+            {
+              "key": "pipes",
+              "sections": "§2.5 and §5.3",
+              "page": 10
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m17",
+            "pipes"
+          ],
+          "evidence": [],
+          "primary_material": "m17"
+        },
+        {
+          "id": "M18",
+          "title": "PIPEs v2 and the unfinished peg boundary",
+          "minutes": 10,
+          "prerequisites": [
+            "M03",
+            "M07",
+            "M16",
+            "M17"
+          ],
+          "topics": "Encrypting a Schnorr key, setup consistency proofs, proposed MPC setup, witness-gated recovery, ordinary Bitcoin signing, and peg-in/peg-out scope",
+          "win": "Describe the PIPE mechanism while separating transfer validity, key release and a complete BTC entry/exit design",
+          "exercise": "Draw the proof-to-key-to-signature path and list the additional questions a complete peg specification must answer",
+          "sources": [
+            {
+              "key": "pipes",
+              "sections": "§§1.1 and 4",
+              "page": 12
+            },
+            {
+              "key": "sb",
+              "sections": "§1.2 and §22",
+              "page": 4
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "m18",
+            "pipes",
+            "proof-map"
+          ],
+          "evidence": [],
+          "primary_material": "m18"
+        },
+        {
+          "id": "M19",
+          "title": "Why the WE ciphertext is so large",
+          "minutes": 8,
+          "prerequisites": [
+            "M07",
+            "M17",
+            "M18"
+          ],
+          "topics": "AADP verifier encoding, variables and constraints, matrix size, succinct witnesses, verifier optimization and modeled costs",
+          "win": "Distinguish proof size, envelope size and WE ciphertext size, and explain what different forms of compression would target",
+          "exercise": "Vary the verifier cost model and explain why reducing two counts has an approximately cubic size effect",
+          "sources": [
+            {
+              "key": "aadp",
+              "sections": "Introduction and §4.10",
+              "page": 35
+            },
+            {
+              "key": "pipes",
+              "sections": "§§5.3–5.4",
+              "page": 17
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "materials": [
+            "size"
+          ],
+          "evidence": [],
+          "primary_material": "size"
+        }
+      ]
+    },
+    {
+      "id": "evaluation",
+      "title": "Evaluate and present the whole proposal",
+      "outcome": "Give an accurate explanation and handle questions you have not rehearsed",
+      "checkpoint": "Deliver a short presentation, answer new failure scenarios, and clearly label specified behavior, assumptions, estimates and open work",
+      "modules": [
+        {
+          "id": "M20",
+          "title": "Security assumptions and failure modes",
+          "minutes": 10,
+          "prerequisites": [
+            "M07",
+            "M10",
+            "M11",
+            "M12",
+            "M14",
+            "M18",
+            "M19"
+          ],
+          "topics": "Proof soundness and zero knowledge, trusted setup, hash binding, encryption, wallet compromise, data availability, malicious indexers and WE heuristic security",
+          "win": "Connect a failed assumption to the particular guarantee it threatens",
+          "exercise": "Evaluate a compromised setup, a lying indexer, a leaked viewing key and a stolen spending key without treating them as equivalent",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§17–19",
+              "page": 26
+            },
+            {
+              "key": "pipes",
+              "sections": "§5.4",
+              "page": 17
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m20",
+          "materials": [
+            "m20"
+          ]
+        },
+        {
+          "id": "M21",
+          "title": "Tradeoffs, alternatives and deployment gaps",
+          "minutes": 10,
+          "prerequisites": [
+            "M09",
+            "M13",
+            "M14",
+            "M18",
+            "M19",
+            "M20"
+          ],
+          "topics": "CoinJoin, PayJoin, Silent Payments, Zcash, Monero and Shielded CSV comparisons; arity, proof/carrier costs, policy dependencies, light clients, private fees, and incomplete deployment choices",
+          "win": "Compare designs by validation, data availability, leakage and assumptions rather than by slogans",
+          "exercise": "Fill a comparison matrix, reconcile envelope versus carrier cost, and classify proposal claims by evidential status",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§2, 22 and Appendix A",
+              "page": 4
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m21",
+          "materials": [
+            "m21"
+          ]
+        },
+        {
+          "id": "M22",
+          "title": "Presentation and audience questions",
+          "minutes": 15,
+          "prerequisites": [
+            "M08",
+            "M10",
+            "M13",
+            "M14",
+            "M15",
+            "M18",
+            "M19",
+            "M20",
+            "M21"
+          ],
+          "topics": "A coherent explanation, concrete failure scenarios, source-backed answers, and handling unspecified details",
+          "win": "Explain the full system in ten minutes and answer five unfamiliar questions without overclaiming",
+          "exercise": "Rehearse from a blank system map; explain one payment; then answer questions about duplicate spends, malicious indexers, reorgs, setup, recovery, fees and entry/exit",
+          "sources": [
+            {
+              "key": "sb",
+              "sections": "§§1.2, 17–22 and Appendix C",
+              "page": 4
+            },
+            {
+              "key": "pipes",
+              "sections": "§§1.1, 4 and 5.4",
+              "page": 3
+            }
+          ],
+          "learning_status": "not_assessed",
+          "material_status": "available",
+          "evidence": [],
+          "primary_material": "m22",
+          "materials": [
+            "m22"
+          ]
+        }
+      ]
+    }
+  ],
+  "optional_extensions": [
+    {
+      "id": "E01",
+      "title": "Atomic swaps and opt-in KYC lineage",
+      "prerequisites": [
+        "M15",
+        "M18",
+        "M20"
+      ],
+      "goal": "Explain the h_aux extension and certified-recipient lineage while keeping sketches distinct from a deployed implementation",
+      "source": {
+        "key": "sb",
+        "sections": "§22.5 and Appendix D",
+        "page": 41
+      },
+      "learning_status": "not_assessed",
+      "primary_material": "e01",
+      "materials": [
+        "e01"
+      ],
+      "material_status": "available",
+      "evidence": [],
+      "minutes": 10
+    },
+    {
+      "id": "E02",
+      "title": "Read the circuit and implementation profile",
+      "prerequisites": [
+        "M07",
+        "M09",
+        "M10",
+        "M20"
+      ],
+      "goal": "Trace private witness values through the constraint blocks and identify which profile choices are required for interoperable implementations",
+      "source": {
+        "key": "sb",
+        "sections": "Appendices A–B",
+        "page": 42
+      },
+      "learning_status": "not_assessed",
+      "primary_material": "e02",
+      "materials": [
+        "e02"
+      ],
+      "material_status": "available",
+      "evidence": [],
+      "minutes": 10
+    }
+  ],
+  "materials": {
+    "notes": {
+      "title": "Notes, nullifiers and proofs",
+      "path": "lessons/0001-notes-nullifiers-and-proofs.html",
+      "panel": "notes"
+    },
+    "tree": {
+      "title": "One shared tree",
+      "path": "lessons/0002-one-shared-tree.html",
+      "panel": "tree"
+    },
+    "pipes": {
+      "title": "Covenants, WE and PIPEs",
+      "path": "lessons/0003-covenants-witness-encryption-and-pipes.html",
+      "panel": "pipes"
+    },
+    "size": {
+      "title": "Why witness encryption is large",
+      "path": "lessons/0004-why-witness-encryption-is-large.html",
+      "panel": "size"
+    },
+    "statements": {
+      "title": "Statements and witnesses",
+      "path": "lessons/0005-statements-and-witnesses.html",
+      "panel": "statements"
+    },
+    "complexity": {
+      "title": "P versus NP",
+      "path": "lessons/0006-p-versus-np.html",
+      "panel": "complexity"
+    },
+    "zk": {
+      "title": "What zero knowledge adds",
+      "path": "lessons/0007-zero-knowledge.html",
+      "panel": "zk"
+    },
+    "snark": {
+      "title": "SNARKs and circuits",
+      "path": "lessons/0008-snarks-and-circuits.html",
+      "panel": "snark"
+    },
+    "proof-map": {
+      "title": "Where the proofs fit",
+      "path": "lessons/0009-where-the-proofs-fit.html",
+      "panel": "proof-map"
+    },
+    "m01": {
+      "title": "Bitcoin’s public ledger",
+      "path": "lessons/0010-bitcoin-public-ledger.html",
+      "panel": "m01"
+    },
+    "m02": {
+      "title": "The cryptographic vocabulary",
+      "path": "lessons/0011-cryptographic-tools.html",
+      "panel": "m02"
+    },
+    "m04": {
+      "title": "Notes, addresses and encrypted outputs",
+      "path": "lessons/0012-notes-addresses-and-ciphertexts.html",
+      "panel": "m04"
+    },
+    "m05": {
+      "title": "Merkle membership and one global tree",
+      "path": "lessons/0013-merkle-membership-and-growth.html",
+      "panel": "m05"
+    },
+    "m06": {
+      "title": "Nullifiers and double-spend prevention",
+      "path": "lessons/0014-nullifiers-and-double-spends.html",
+      "panel": "m06"
+    },
+    "m07": {
+      "title": "What the transfer proof actually proves",
+      "path": "lessons/0015-transfer-proof-and-replay-checks.html",
+      "panel": "m07"
+    },
+    "m08": {
+      "title": "Alice pays Bob, end to end",
+      "path": "lessons/0016-alice-pays-bob.html",
+      "panel": "m08"
+    },
+    "m09": {
+      "title": "Envelope, carrier and body binding",
+      "path": "lessons/0017-envelope-carrier-and-binding.html",
+      "panel": "m09"
+    },
+    "m10": {
+      "title": "Deterministic replay and indexer trust",
+      "path": "lessons/0018-replay-and-indexer-trust.html",
+      "panel": "m10"
+    },
+    "m11": {
+      "title": "Anchors, confirmations and reorganizations",
+      "path": "lessons/0019-anchors-and-reorganizations.html",
+      "panel": "m11"
+    },
+    "m12": {
+      "title": "Keys and separate capabilities",
+      "path": "lessons/0020-wallet-keys-and-capabilities.html",
+      "panel": "m12"
+    },
+    "m13": {
+      "title": "Recovery from seed and history",
+      "path": "lessons/0021-wallet-recovery.html",
+      "panel": "m13"
+    },
+    "m14": {
+      "title": "Privacy guarantees and metadata",
+      "path": "lessons/0022-privacy-and-public-metadata.html",
+      "panel": "m14"
+    },
+    "m15": {
+      "title": "Disclosure and audit claims",
+      "path": "lessons/0023-disclosure-and-audit-evidence.html",
+      "panel": "m15"
+    },
+    "m16": {
+      "title": "Covenants and transaction restrictions",
+      "path": "lessons/0024-covenants-and-key-release.html",
+      "panel": "m16"
+    },
+    "m17": {
+      "title": "Witness encryption from first principles",
+      "path": "lessons/0025-witness-encryption-in-detail.html",
+      "panel": "m17"
+    },
+    "m18": {
+      "title": "PIPEs v2 and the unfinished peg boundary",
+      "path": "lessons/0026-pipes-and-the-peg-boundary.html",
+      "panel": "m18"
+    },
+    "m20": {
+      "title": "Security assumptions and failure modes",
+      "path": "lessons/0027-security-assumptions-and-failures.html",
+      "panel": "m20"
+    },
+    "m21": {
+      "title": "Tradeoffs, alternatives and deployment gaps",
+      "path": "lessons/0028-tradeoffs-and-open-work.html",
+      "panel": "m21"
+    },
+    "m22": {
+      "title": "Presentation and audience questions",
+      "path": "lessons/0029-presentation-and-questions.html",
+      "panel": "m22"
+    },
+    "e01": {
+      "title": "Atomic swaps and opt-in KYC lineage",
+      "path": "lessons/0030-optional-swaps-and-lineage.html",
+      "panel": "e01"
+    },
+    "e02": {
+      "title": "Read the circuit and implementation profile",
+      "path": "lessons/0031-reading-the-circuit-and-profile.html",
+      "panel": "e02"
+    }
+  },
+  "material_policy": "Each core module and optional extension has an available primary HTML lesson. Generated pages do not establish learner understanding"
+}

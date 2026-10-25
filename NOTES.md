@@ -1,0 +1,37 @@
+# Teaching notes
+
+- Learner's confirmed aim: explain the presentation clearly and handle questions
+- Learner's stated uncertainty: notes, nullifiers, and zero-knowledge proofs
+- Added interests: what PIPEs v2 and witness encryption mean, how they work, why size is high, what compression helps, and where ZKPs fit
+- HTML must use a dark theme; reference print styles can use a light background for legibility on paper
+- Direct prose, almost no analogies, consistent vocabulary, short lessons, immediate exercise feedback
+- Added interest: state construction, tree growth, and whether indexers partition notes into separate trees
+- Added interest: covenants; introduce output restrictions before the PIPE mechanism and distinguish them from conditional key release
+- User correction: the teaching was too driven by individual questions; provide a complete prerequisite-based course for understanding Shielded Bitcoin
+- `curriculum.json` is the authoritative course plan: 26 core modules in six stages, plus two optional extensions
+- `lessons/plan.html` is generated from that plan; `lessons/index.html` opens on it
+- Course coverage: foundations → private spend → publication/replay → wallets/privacy → covenants/WE/PIPEs → evaluation/presentation
+- Numbered HTML artifact names are stable; their numbers are not the curriculum order
+- User correction: do not gate HTML generation on demonstrated understanding or leave learner-level placeholders as the lesson deliverable
+- Lessons are available before assessment; adapt explanations and review from actual responses, separately from material availability
+- Added prerequisites explicitly requested: SNARKs, P versus NP, NP statements and their relationship to zero-knowledge proofs
+- User's explicit style preference: plain English, easy to understand, while remaining accurate; introduce terms before notation and state the limits of simplifications
+- Current recommended starting point: F01 in `lessons/foundations.html`, then F02–F04 and the system connection
+- Five new foundations pages are available, alongside four protocol exercises and two printable references
+- Use alloc init for protocol claims and Cook, Thaler and Groth for the mathematical prerequisites those papers assume
+- Track module understanding in `curriculum.json` and link to evidence in `learning-records`; all modules remain unassessed until there is actual learner evidence
+- Practice responses live only in the current browser page; no completion or mastery has been inferred from generating lessons
+- Do not create learning records until the learner demonstrates understanding, states prior knowledge, corrects a misconception, or changes the mission
+- Sources checked on October 25, 2026; keep modeled cost, deployed behavior, and transfer-paper scope distinct
+
+- User requested all missing HTML lessons; all 26 core modules and both optional extensions now have a primary page
+- Added 22 numbered pages (0010–0031); total is 31 numbered lessons, including three earlier supporting overviews
+- `primary_material` maps each module to its main lesson; all material statuses are available, while all learning statuses remain unassessed
+- New lesson content is authored in `content/course-lessons.mjs` and generated through `scripts/generate-course-lessons.mjs`; the main build generates these before bundling
+- New standalone pages inline the shared CSS and JavaScript at build time; shared source components remain in `assets/`
+- The course selector follows curriculum order, with canonical previous/next links and optional extensions included
+- Exercises cover cases, Bitcoin fee arithmetic, symbolic Merkle paths, transfer ordering, deterministic replay, anchor boundaries, byte counts and presentation rehearsal
+- Case choices vary the correct position and have equal word counts within each question
+- Rehearsal drafts remain in the current page only; generated material and browser practice do not automatically create learning evidence
+- Verification: all 36 HTML documents passed local-link, fragment, ID and quiz-length checks; desktop/mobile browser checks covered all lesson panels and exercises; the standalone rehearsal page was checked separately
+- The final mobile run passed 625 checks after improving comparison-table readability and making the selected rehearsal question fully visible; Slidev build and presenter-note synchronization also passed

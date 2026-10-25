@@ -1,0 +1,27 @@
+.plan-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 18px 0 25px; color: var(--muted); font-size: 13px; }
+.plan-meta strong { color: var(--ink); }
+.course-stage { margin: 23px 0; padding: 21px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+.stage-header { display: flex; gap: 14px; align-items: baseline; }
+.stage-number { color: var(--violet); font: 500 15px 'SFMono-Regular', Consolas, monospace; }
+.stage-header h2 { margin: 0; font-size: 21px; }
+.stage-outcome { color: var(--muted); font-size: 14px; margin: 10px 0 18px; }
+.module { margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.module summary { display: flex; gap: 11px; align-items: baseline; padding: 12px 0; color: var(--ink); font-weight: 450; line-height: 1.45; }
+.module summary::after { content: '+'; margin-left: 3px; color: var(--violet); font-size: 17px; }
+.module[open] summary::after { content: '−'; }
+.module-code { color: var(--muted); font: 12px 'SFMono-Regular', Consolas, monospace; min-width: 27px; }
+.module-title { flex: 1; min-width: 0; }
+.module-duration { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.module-content { padding: 0 0 16px 38px; font-size: 14px; }
+.module-content p { margin: 7px 0 12px; }
+.module-content strong { font-weight: 600; }
+.module-content .source { font-size: 12px; }
+.checkpoint { margin: 12px 0 0; padding: 12px 14px; border-left: 2px solid var(--cyan); background: #121e2c; font-size: 13px; color: #bdcfe1; }
+.checkpoint strong { color: var(--cyan); }
+.study-loop { display: flex; flex-wrap: wrap; gap: 5px 11px; align-items: center; font-size: 14px; padding: 14px 0; }
+.study-loop span:nth-child(even) { color: var(--muted); }
+.plan-next { margin: 20px 0; border-left: 3px solid var(--violet); padding: 10px 0 10px 17px; }
+.plan-next p { margin: 6px 0; }
+.plan-controls button { font-size: 13px; }
+@media (max-width: 560px) { .course-stage { padding: 16px; } .stage-header h2 { font-size: 19px; } .module-content { padding-left: 0; } .module-code { min-width: 22px; } .module summary { gap: 7px; } .module-duration { font-size: 11px; } }
+@media print { .module-content { display: block !important; } .module > summary { color: black; } .module summary::after, .plan-controls { display: none; } .course-stage { break-inside: auto; } .module { break-inside: avoid; } .checkpoint { background: #f2f2f2; color: black; } .checkpoint strong { color: #222; } }

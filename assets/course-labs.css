@@ -1,0 +1,39 @@
+.course-toolbar { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: end; margin: 4px 0 28px; }
+.course-toolbar label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+.course-toolbar select { min-width: 0; font-size: 14px; }
+.course-toolbar > div { min-width: 0; }
+.module-start { display: inline-block; margin: 4px 0 10px; padding: 8px 12px; border: 1px solid #476576; border-radius: 8px; text-decoration: none; }
+.lesson-objective { color: var(--muted); font-size: 14px; }
+.case-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.case-tabs button { font-size: 13px; padding: 7px 11px; }
+.case-study .quiz { margin-top: 10px; }
+.lab-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.lab-fields label { display: block; font-size: 14px; }
+.lab-fields input { display: block; width: 100%; margin: 6px 0; }
+.key-path { display: grid; gap: 9px; font-family: monospace; }
+.key-path div { border-left: 2px solid var(--amber); padding: 6px 12px; background: var(--panel2); overflow-wrap: anywhere; }
+.merkle-level { display: grid; gap: 8px; margin: 12px 0; }
+.merkle-level.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.merkle-level.four { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.merkle-node { padding: 12px 5px; text-align: center; border: 1px solid var(--line); border-radius: 8px; font-family: monospace; overflow-wrap: anywhere; background: var(--panel2); }
+.merkle-node.selected { border-color: var(--amber); color: var(--amber); }
+.merkle-node.empty { color: var(--muted); border-style: dashed; }
+.replay-state p { margin: 7px 0; }
+.sequence-buttons { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+.sequence-buttons button { text-align: left; }
+.sequence-progress { padding-left: 23px; }
+.rehearsal-draft { display: block; width: 100%; min-height: 150px; resize: vertical; padding: 14px; border: 1px solid var(--line); border-radius: 9px; background: #0b0e1a; color: var(--ink); font: inherit; margin-top: 10px; }
+.review-checks label { display: block; margin: 10px 0; }
+.review-checks input { accent-color: var(--violet); margin-right: 9px; }
+.reading-link { display: block; margin: 8px 0; }
+@media (max-width: 560px) { .course-toolbar { grid-template-columns: 1fr; } .course-toolbar > button { justify-self: start; } .sequence-buttons { grid-template-columns: 1fr; } .lab-fields { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .comparison-table, .comparison-table tbody, .comparison-table tr, .comparison-table td { display: block; width: 100%; }
+  .comparison-table thead { display: none; }
+  .comparison-table tr { margin-bottom: 14px; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .comparison-table td { border: 0; padding: 0; }
+  .comparison-table td:first-child { font-size: 17px; font-weight: 600; color: var(--violet); }
+  .comparison-table td + td { margin-top: 12px; }
+  .comparison-table td[data-label]::before { content: attr(data-label); display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+}
+@media print { .course-toolbar, .case-tabs, .sequence-buttons, .rehearsal-draft { display: none; } .key-path div, .merkle-node { background: white; } }
