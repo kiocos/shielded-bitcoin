@@ -10,11 +10,11 @@ English BitDevs talk, without equations: **[Shielded Bitcoin — notes, proofs a
 
 Interactive course in English: **[From Zcash to Shielded Bitcoin](aula-zcash/README.md)** — 59 screens for self-paced study, with labs and explained answers. Run `npm run study` and open http://localhost:3031.
 
-A 34-slide explanation of the September 2026 proposal: encrypted notes, nullifiers, proofs,
+A 35-slide explanation of the September 2026 proposal: encrypted notes, nullifiers, proofs,
 deterministic replay, wallet recovery and privacy limits. The talk distinguishes the specified
 transfer layer from the unfinished peg, private-fee and deployment work.
 
-Start with the **[presenter script](shielded-bitcoin-script.md)**: about 28–30 minutes at the stated
+Start with the **[presenter script](shielded-bitcoin-script.md)**: about 30–32 minutes at the stated
 pace, with click cues, a shorter cut, Q&A preparation and a source map. The [Slidev deck](slides.md)
 is its visual companion, with matching presenter notes.
 
@@ -30,6 +30,8 @@ Run `npm run notes:check` to check synchronization and click counts. Layout and 
 belong in `slides.md` and `components/`. Add `--with-clicks` when exporting every build step.
 
 Sources:
+
+- [Shielded CSV paper](https://github.com/ShieldedCSV/ShieldedCSV/releases/latest/download/shieldedcsv.pdf) — Glass Coins comparison: privacy, publisher fees and estimated capacity.
 
 - [Shielded Bitcoin paper](https://www.allocinit.xyz/uploads/shielded-bitcoin.pdf) — the transfer specification, assumptions and limitations.
 - [Bitcoin PIPEs v2](https://eprint.iacr.org/2026/186) — the proposed direction for the peg; witness encryption remains research.

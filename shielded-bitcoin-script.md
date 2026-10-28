@@ -1,8 +1,8 @@
 # Shielded Bitcoin — Speaker Script
 
-**Runtime:** about 28–30 minutes as written, plus questions. The timing guide assumes roughly
+**Runtime:** about 30–32 minutes as written, plus questions. The timing guide assumes roughly
 155 spoken words per minute and short pauses for the click animations. Rehearse once; a slower
-140-word pace takes about 32 minutes. The cut plan gives a version of about 23–24 minutes.
+140-word pace takes about 34 minutes. The cut plan gives a version of about 23–24 minutes.
 **Audience:** technical, without assuming knowledge of zero-knowledge proofs, Merkle trees or
 shielded-note protocols.
 **Scope:** the September 24, 2026 paper and its implementation profile. This is an explanation of
@@ -13,8 +13,8 @@ The slides are the visual companion. Read the blockquotes; italic directions are
 slides are brief transitions. Press `p` in Slidev for presenter mode: the spoken text and stage
 directions are also in the deck's notes.
 
-The note tree returns across slides 8, 9 and 27. The envelope stays in place across slides 11–12,
-and Alice's transfer stays in place across slides 22–23. Let the diagrams develop as you explain.
+The note tree returns across slides 9, 10 and 28. The envelope stays in place across slides 12–13,
+and Alice's transfer stays in place across slides 23–24. Let the diagrams develop as you explain.
 
 **Colour code:** orange = Bitcoin; violet = notes, ciphertexts and proofs; cyan = replay/indexers
 and read-only viewing keys; green = accepted or hidden from outside observers; red = rejected or
@@ -90,7 +90,36 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 2:10 — Slide 4 · Encrypted notes, published on Bitcoin
+## 2:10 — Slide 4 · Two approaches to privacy
+
+*[CUT] Skip this comparison in the short version. Reveal rows in four groups; the column headings stay in place.*
+
+> Glass Coins, previously called Shielded CSV, is another proposal for private transfers using
+> Bitcoin. It sends private coin data and proofs to recipients. Shielded Bitcoin publishes
+> encrypted notes and proofs on Bitcoin, using a Zcash-style note model.
+>
+> **[click]** That difference affects capacity. The CSV paper estimates about a hundred
+> transfers per second, using compact, batched nullifiers. For Shielded Bitcoin's two-input,
+> two-output OP_RETURN example, the block-space estimate is roughly two to three per second.
+> These assume full blocks and different publication methods. They are not measured throughput
+> or a universal speed ratio; a witness carrier changes the Shielded Bitcoin calculation.
+>
+> **[click]** Both designs hide the shielded sender, recipient and amounts from public
+> observers. These checks describe what the protocol hides, not immunity from metadata analysis.
+>
+> **[click]** CSV also hides the output count and pays publishers within the private protocol.
+> The publisher sees its own fee payment; the Bitcoin mining fee is still public. Shielded
+> Bitcoin exposes its output count and carrier fee. The wallet funding that fee can reveal
+> information about the sender.
+>
+> **[click]** Recovery is the other tradeoff. Seed and Bitcoin history cannot replace lost
+> private CSV data. Shielded Bitcoin publishes what wallets need to recover transfer history,
+> assuming the agreed starting state and bootstrap recovery data. This comparison covers
+> transfers; neither column establishes the security of a complete BTC peg.
+
+---
+
+## 3:50 — Slide 5 · Encrypted notes, published on Bitcoin
 
 > Here is the whole idea in a few sentences.
 >
@@ -106,13 +135,13 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 2:45 — Slide 5 · The model
+## 4:25 — Slide 6 · The model
 
 > First, who does what.
 
 ---
 
-## 2:50 — Slide 6 · Three roles
+## 4:30 — Slide 7 · Three roles
 
 *Start with Bitcoin at the bottom. Let each moving token arrive before the next click.*
 
@@ -144,7 +173,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 4:10 — Slide 7 · A note
+## 5:50 — Slide 8 · A note
 
 > The basic object is a note: a record of value that can be created once and spent once.
 >
@@ -167,7 +196,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 5:20 — Slide 8 · The note tree
+## 7:00 — Slide 9 · The note tree
 
 *Point to the root when defining it. Leaves stay in place throughout.*
 
@@ -188,7 +217,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 6:15 — Slide 9 · Spending publishes a nullifier
+## 7:55 — Slide 10 · Spending publishes a nullifier
 
 *Pause at the rejected second spend. The leaf remains in the tree.*
 
@@ -219,7 +248,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 7:40 — Slide 10 · The proof
+## 9:20 — Slide 11 · The proof
 
 *[CUT] Keep the six clicks, but shorten the explanation to membership, authority, correct outputs and exact balance.*
 
@@ -255,7 +284,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 9:30 — Slide 11 · The transfer envelope
+## 11:10 — Slide 12 · The transfer envelope
 
 *[CUT] For the shorter talk, reveal the bar quickly: nullifiers, encrypted outputs, recovery data, proof. Do not read byte counts.*
 
@@ -286,9 +315,9 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 10:40 — Slide 12 · Bound to the body
+## 12:20 — Slide 13 · Bound to the body
 
-*[CUT] Optional slide in the short version. The changed field is ct_out. Advance from slide 11 without resetting the canvas.*
+*[CUT] Optional slide in the short version. The changed field is ct_out. Advance from slide 12 without resetting the canvas.*
 
 > Same envelope. There is a problem to solve here.
 >
@@ -311,13 +340,13 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 11:40 — Slide 13 · Replay
+## 13:20 — Slide 14 · Replay
 
 > Now what indexers actually do.
 
 ---
 
-## 11:45 — Slide 14 · Every indexer runs the same checks
+## 13:25 — Slide 15 · Every indexer runs the same checks
 
 *Let the valid envelope finish before showing the rejected one.*
 
@@ -340,7 +369,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 12:50 — Slide 15 · Same blocks, same state
+## 14:30 — Slide 16 · Same blocks, same state
 
 > That is the property everything else rests on.
 >
@@ -361,7 +390,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 13:50 — Slide 16 · Confirmed is not the same as accepted
+## 15:30 — Slide 17 · Confirmed is not the same as accepted
 
 *Pause after the final sentence. Replay acceptance and confirmation depth are separate requirements.*
 
@@ -380,7 +409,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 14:30 — Slide 17 · The anchor
+## 16:10 — Slide 18 · The anchor
 
 *The drawing compresses a 100-block window into ten boxes. It is schematic, not a scale drawing.*
 
@@ -411,13 +440,13 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 16:05 — Slide 18 · Keys
+## 17:45 — Slide 19 · Keys
 
 > Now the wallet side.
 
 ---
 
-## 16:10 — Slide 19 · One seed, separate capabilities
+## 17:50 — Slide 20 · One seed, separate capabilities
 
 *[CUT] Short version: one seed, spending authority, two read-only viewing keys. Reveal all six steps.*
 
@@ -444,7 +473,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 17:20 — Slide 20 · Disclosure is read-only
+## 19:00 — Slide 21 · Disclosure is read-only
 
 *[CUT] Optional in the short version. Keep the distinction between seeing a payment and proving a balance.*
 
@@ -470,13 +499,13 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 18:30 — Slide 21 · One transfer
+## 20:10 — Slide 22 · One transfer
 
 > Let us put it all together with one transfer. Alice pays Bob.
 
 ---
 
-## 18:35 — Slide 22 · Alice pays Bob (building)
+## 20:15 — Slide 23 · Alice pays Bob (building)
 
 *Amounts in the diagram are BTC-denominated examples; notes store integer satoshis. Wait for moving tokens to arrive.*
 
@@ -503,9 +532,9 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 19:50 — Slide 23 · Alice pays Bob (settling)
+## 21:30 — Slide 24 · Alice pays Bob (settling)
 
-*Keep the same canvas. This example is one input and two outputs, unlike the size example on slide 11.*
+*Keep the same canvas. This example is one input and two outputs, unlike the size example on slide 12.*
 
 > Same picture. The envelope is in a block.
 >
@@ -526,7 +555,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 20:50 — Slide 24 · Recovery from seed and history
+## 22:30 — Slide 25 · Recovery from seed and history
 
 *The recovery claim concerns the transfer history. Do not extend it to an unspecified peg or bootstrap process.*
 
@@ -546,13 +575,13 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 21:40 — Slide 25 · Privacy
+## 23:20 — Slide 26 · Privacy
 
 > Now the privacy boundary: what an observer learns.
 
 ---
 
-## 21:45 — Slide 26 · What an observer sees
+## 23:25 — Slide 27 · What an observer sees
 
 > **[click]** The shielded data does not directly reveal to an outside observer: the amounts.
 > The sender. The recipient. Which earlier note was spent. And which inputs became which
@@ -572,7 +601,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 22:45 — Slide 27 · The privacy set
+## 24:25 — Slide 28 · The privacy set
 
 *Crosses show candidates excluded by an informed observer. They are not public spent flags on tree leaves.*
 
@@ -597,7 +626,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 23:50 — Slide 28 · Metadata that can still link you
+## 25:30 — Slide 29 · Metadata that can still link you
 
 > Four specific leaks, all named in the paper.
 >
@@ -620,13 +649,13 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 24:55 — Slide 29 · Open questions
+## 26:35 — Slide 30 · Open questions
 
 > Finally, what the paper does not do.
 
 ---
 
-## 25:00 — Slide 30 · Outside this paper
+## 26:40 — Slide 31 · Outside this paper
 
 *Keep the peg and setup limitations even when cutting for time. The fee multiple is an attributed estimate, not a benchmark.*
 
@@ -654,7 +683,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 26:20 — Slide 31 · PIPEs, briefly
+## 28:00 — Slide 32 · PIPEs, briefly
 
 *[CUT] Optional in the short version. Do not describe practical witness encryption as settled.*
 
@@ -677,7 +706,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 27:10 — Slide 32 · Extensions sketched in the paper
+## 28:50 — Slide 33 · Extensions sketched in the paper
 
 *[CUT] Optional in the short version. These are sketches of extensions, not core transfer features.*
 
@@ -695,7 +724,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 28:00 — Slide 33 · What to take away
+## 29:40 — Slide 34 · What to take away
 
 > Three things to take with you.
 >
@@ -712,7 +741,7 @@ cost estimate is explicitly attributed when used.
 
 ---
 
-## 28:45 — Slide 34 · Thank you!
+## 30:25 — Slide 35 · Thank you!
 
 *Leave the QR code on screen during questions.*
 
@@ -731,23 +760,47 @@ through the whole script to compensate for a late start.
 
 | Change | How to present it | Approximate saving |
 |---|---|---:|
+| Slide 4 | Skip the comparison; retain the later recovery and metadata explanations. | 1 min 40 s |
 | Slide 3 | One sentence per category; reveal all four panes. | 25 s |
-| Slide 10 | Keep all clicks; state what is proved without reading the public/private input lists. | 30 s |
-| Slides 11–12 | Name the envelope parts and say the proof binds its body. Skip slide 12. | 1 min 20 s |
-| Slides 19–20 | Briefly show spending versus viewing keys; skip the disclosure catalogue on slide 20. | 1 min 15 s |
-| Slide 31 | Say PIPEs is the proposed direction and witness encryption remains research. Skip the mechanism. | 45 s |
-| Slide 32 | Skip both extension sketches. | 45 s |
+| Slide 11 | Keep all clicks; state what is proved without reading the public/private input lists. | 30 s |
+| Slides 12–13 | Name the envelope parts and say the proof binds its body. Skip slide 13. | 1 min 20 s |
+| Slides 20–21 | Briefly show spending versus viewing keys; skip the disclosure catalogue on slide 21. | 1 min 15 s |
+| Slide 32 | Say PIPEs is the proposed direction and witness encryption remains research. Skip the mechanism. | 45 s |
+| Slide 33 | Skip both extension sketches. | 45 s |
 
 Use slide navigation to jump over optional slides; do not delete them or renumber this script.
-When skipping slide 20, say: “Viewing keys let a wallet disclose history without granting spending
+When skipping slide 21, say: “Viewing keys let a wallet disclose history without granting spending
 rights. They are broad read capabilities, so individual note openings are better for narrow audits.”
-When skipping slide 31, say: “The proposed peg direction is PIPEs v2, which depends on witness
+When skipping slide 32, say: “The proposed peg direction is PIPEs v2, which depends on witness
 encryption. This paper does not specify that peg, and the concrete construction remains research.”
 
 ## Q&A PREP
 
 These answers are preparation, outside the runtime above. They describe the cited specification.
 Where a deployment decision is missing, say so.
+
+### Comparison assumptions — slide 4
+
+The comparison follows the Shielded CSV paper, rather than claiming measured Glass Coins product
+performance. “Private” means hidden from public observers: counterparties know their own payment,
+and publishers learn their own fee. CSV publisher payments occur inside the protocol, while the
+Bitcoin mining fee remains public. “Output count” means the number of created shielded coins/notes,
+not output values. “Recovery” asks whether seed plus Bitcoin history can replace lost private wallet
+data; it does not claim that CSV cannot recover from a separate backup.
+
+Capacity assumes the entire 4,000,000-WU block budget and a 600-second average block interval.
+CSV approaches 64 bytes per transfer with batching; witness publication gives an idealized
+4,000,000 / 64 / 600 ≈ 104 TPS before overhead, consistent with the paper's approximately 100 TPS.
+Shielded Bitcoin's two-input/two-output OP_RETURN output alone uses 2,500 WU: an upper estimate of
+4,000,000 / 2,500 / 600 ≈ 2.67 TPS before carrier overhead. The reported roughly 700-vB whole-transfer
+estimate gives ≈2.38 TPS. The slide therefore says ≈2–3, rather than promising 3 TPS. These use
+**different carrier assumptions**; the paper's illustrative 438-vB witness alternative would imply
+≈3.8 TPS under its own assumptions. None of these figures is an observed network benchmark.
+
+Sources: [Shielded CSV §1.1 and §2](https://github.com/ShieldedCSV/ShieldedCSV/releases/latest/download/shieldedcsv.pdf),
+[Shielded Bitcoin §2, §16, §20 and Appendix A.4](https://www.allocinit.xyz/uploads/shielded-bitcoin.pdf),
+and the attributed 700-vB estimate in the figures below. The naming is confirmed in the
+[Shielded Bitcoin author's comparison](https://delvingbitcoin.org/t/shielded-bitcoin-private-transfers-on-the-bitcoin-l1/2912).
 
 ### Figures to have ready
 
@@ -780,7 +833,7 @@ two-output walkthrough, or confuse it with a total carrier transaction size.
 | **Total** | **610** |
 
 *Source: [paper Appendix A.4, pp. 43–44](https://www.allocinit.xyz/uploads/shielded-bitcoin.pdf#page=43).
-The bar on slide 11 represents their relative sizes, with the header widened for legibility.*
+The bar on slide 12 represents their relative sizes, with the header widened for legibility.*
 
 ### Is it non-custodial? Are these actual BTC?
 
@@ -904,7 +957,7 @@ that simply adding a relayer removes that leakage. *Paper §14, §20, §22.*
 All leaves under the chosen root are only an upper bound. An observer's own notes, disclosures,
 entry/exit amounts, timing and other knowledge can reduce candidates, possibly to one. Knowing a
 note's plaintext as its sender does not automatically reveal its nullifier; do not indiscriminately
-exclude every note an observer ever sent. The crosses on slide 27 illustrate exclusions justified
+exclude every note an observer ever sent. The crosses on slide 28 illustrate exclusions justified
 by additional knowledge, not a public list of spent leaves. *Paper §9, §20.*
 
 ### Does h_body identify the sender to everyone?
@@ -930,20 +983,25 @@ sender's name a public envelope field. *Paper §13, §20.*
 5. **[Bitcoin Magazine announcement](https://bitcoinmagazine.com/technical/alloc-init-releases-shielded-bitcoin-proposal-for-private-bitcoin-transactions)**.
    Further reading from the handoff; not used to establish transfer security guarantees.
 
+6. **[Shielded CSV: Private and Efficient Client-Side Validation](https://github.com/ShieldedCSV/ShieldedCSV/releases/latest/download/shieldedcsv.pdf)**,
+   Jonas Nick, Liam Eagen and Robin Linus. Primary source for the comparison on slide 4:
+   §1.1 for privacy, output counts and capacity, and §2 “Fees” for publisher payments.
+
 ### Claim map for rehearsal and fact-checking
 
 | Slides | Primary passages |
 |---|---|
-| 1–4: motivation and scope | Paper §1–2, pp. 3–5 |
-| 5–6: Bitcoin, replay and wallets | Paper §3–4, pp. 6–8 |
-| 7–9: notes, leaves and nullifiers | Paper §5, §8–9, pp. 9, 13–16 |
-| 10: proof obligations | Paper §14, pp. 22–23; App. B, pp. 46–47 |
-| 11–12: envelope and binding | Paper §11–13, pp. 17–21; App. A.3–A.5, pp. 43–44; Core 30 policy notes |
-| 13–17: replay, agreement, finality and anchors | Paper §8, §15, §17–19; App. A.6–A.7 |
-| 18–20: keys and disclosure | Paper §6–7, pp. 10–12 |
-| 21–24: walkthrough and recovery | Paper §10, §16, App. C; §1.1 for initial-note recovery qualification |
-| 25–28: privacy and metadata | Paper §20, pp. 31–37 |
-| 29–30: unfinished work and cost | Paper §1.2, §17 A3, §22, App. A.4; CoinDesk only for reported estimates/status |
-| 31: PIPEs | Paper §22; PIPEs v2 abstract and construction |
-| 32: extensions | Paper §22; App. D, pp. 53–54 |
-| 33–34: recap | Paper §1.2, §18, §20–22 |
+| 1–3, 5: motivation and scope | Paper §1–2, pp. 3–5 |
+| 4: Glass Coins comparison | CSV paper §1.1, §2 “Fees”; Shielded Bitcoin §2, §16, §20, App. A.4; capacity arithmetic in Q&A prep |
+| 6–7: Bitcoin, replay and wallets | Paper §3–4, pp. 6–8 |
+| 8–10: notes, leaves and nullifiers | Paper §5, §8–9, pp. 9, 13–16 |
+| 11: proof obligations | Paper §14, pp. 22–23; App. B, pp. 46–47 |
+| 12–13: envelope and binding | Paper §11–13, pp. 17–21; App. A.3–A.5, pp. 43–44; Core 30 policy notes |
+| 14–18: replay, agreement, finality and anchors | Paper §8, §15, §17–19; App. A.6–A.7 |
+| 19–21: keys and disclosure | Paper §6–7, pp. 10–12 |
+| 22–25: walkthrough and recovery | Paper §10, §16, App. C; §1.1 for initial-note recovery qualification |
+| 26–29: privacy and metadata | Paper §20, pp. 31–37 |
+| 30–31: unfinished work and cost | Paper §1.2, §17 A3, §22, App. A.4; CoinDesk only for reported estimates/status |
+| 32: PIPEs | Paper §22; PIPEs v2 abstract and construction |
+| 33: extensions | Paper §22; App. D, pp. 53–54 |
+| 34–35: recap | Paper §1.2, §18, §20–22 |

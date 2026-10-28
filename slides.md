@@ -142,6 +142,41 @@ the data published on Bitcoin, and no change to Bitcoin.
 -->
 
 ---
+clicks: 4
+---
+
+# Two approaches to privacy
+
+<ProtocolComparison :clicks="$clicks" />
+
+<!--
+*[CUT] Skip this comparison in the short version. Reveal rows in four groups; the column headings stay in place.*
+
+Glass Coins, previously called Shielded CSV, is another proposal for private transfers using
+Bitcoin. It sends private coin data and proofs to recipients. Shielded Bitcoin publishes
+encrypted notes and proofs on Bitcoin, using a Zcash-style note model.
+
+**[click]** That difference affects capacity. The CSV paper estimates about a hundred
+transfers per second, using compact, batched nullifiers. For Shielded Bitcoin's two-input,
+two-output OP_RETURN example, the block-space estimate is roughly two to three per second.
+These assume full blocks and different publication methods. They are not measured throughput
+or a universal speed ratio; a witness carrier changes the Shielded Bitcoin calculation.
+
+**[click]** Both designs hide the shielded sender, recipient and amounts from public
+observers. These checks describe what the protocol hides, not immunity from metadata analysis.
+
+**[click]** CSV also hides the output count and pays publishers within the private protocol.
+The publisher sees its own fee payment; the Bitcoin mining fee is still public. Shielded
+Bitcoin exposes its output count and carrier fee. The wallet funding that fee can reveal
+information about the sender.
+
+**[click]** Recovery is the other tradeoff. Seed and Bitcoin history cannot replace lost
+private CSV data. Shielded Bitcoin publishes what wallets need to recover transfer history,
+assuming the agreed starting state and bootstrap recovery data. This comparison covers
+transfers; neither column establishes the security of a complete BTC peg.
+-->
+
+---
 layout: center
 class: text-center
 ---
@@ -436,7 +471,7 @@ clicks: 3
 </div>
 
 <!--
-*[CUT] Optional slide in the short version. The changed field is ct_out. Advance from slide 11 without resetting the canvas.*
+*[CUT] Optional slide in the short version. The changed field is ct_out. Advance from slide 12 without resetting the canvas.*
 
 Same envelope. There is a problem to solve here.
 
@@ -771,7 +806,7 @@ clicks: 3
 <TransferCanvas class="mt-6" :step="5 + $clicks" />
 
 <!--
-*Keep the same canvas. This example is one input and two outputs, unlike the size example on slide 11.*
+*Keep the same canvas. This example is one input and two outputs, unlike the size example on slide 12.*
 
 Same picture. The envelope is in a block.
 
