@@ -5,10 +5,26 @@
   "scripts": {
     "dev": "slidev",
     "build": "slidev build",
+    "pages:build": "node scripts/build-pages.mjs",
+    "pages:preview": "node scripts/preview-pages.mjs",
     "export": "slidev export",
+    "v2": "npm --prefix shielded-bitcoin-v2 run dev",
+    "v2:sync": "node shielded-bitcoin-v2/scripts/generate.mjs",
+    "v2:check": "node shielded-bitcoin-v2/scripts/generate.mjs --check",
+    "v2:build": "npm --prefix shielded-bitcoin-v2 run build",
+    "v2:pdf": "npm --prefix shielded-bitcoin-v2 run export:pdf",
     "qr": "node scripts/make-qr.mjs",
     "notes:sync": "node scripts/sync-notes.mjs",
-    "notes:check": "node scripts/sync-notes.mjs --check"
+    "notes:check": "node scripts/sync-notes.mjs --check",
+    "study": "cd aula-zcash && ../node_modules/.bin/slidev --port 3031",
+    "study:generate": "node aula-zcash/scripts/generate.mjs",
+    "study:build": "npm run study:generate && cd aula-zcash && ../node_modules/.bin/slidev build --out dist",
+    "bitdevs": "cd bitdevs-shielded && ../node_modules/.bin/slidev --port 3032",
+    "bitdevs:sync": "node bitdevs-shielded/scripts/generate.mjs",
+    "bitdevs:check": "node bitdevs-shielded/scripts/generate.mjs --check",
+    "bitdevs:build": "npm run bitdevs:sync && cd bitdevs-shielded && ../node_modules/.bin/slidev build --out dist",
+    "bitdevs:qa": "node bitdevs-shielded/scripts/check-browser.mjs",
+    "bitdevs:pdf": "cd bitdevs-shielded && ../node_modules/.bin/slidev export --range 1-26 --output output/shielded-bitcoin-bitdevs.pdf --wait 1000"
   },
   "dependencies": {
     "@slidev/cli": "^52.0.0",

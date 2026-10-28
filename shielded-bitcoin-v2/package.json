@@ -1,0 +1,12 @@
+{
+  "name": "shielded-bitcoin-presentation-v2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "../node_modules/.bin/slidev --port 3033",
+    "notes:sync": "node scripts/generate.mjs",
+    "notes:check": "node scripts/generate.mjs --check",
+    "build": "npm run notes:check && ../node_modules/.bin/slidev build --out dist",
+    "export:pdf": "npm run notes:check && ../node_modules/.bin/slidev export --per-slide --output output/shielded-bitcoin-v2.pdf --wait 2500"
+  }
+}

@@ -1,5 +1,15 @@
 # Shielded Bitcoin
 
+**[Open all presentations](https://kiocos.github.io/shielded-bitcoin/)** — four versions in English, each with its own permanent link.
+
+All four versions can be published together on GitHub Pages, with a menu at the site root and a separate address for each deck. See **[Publishing all versions](site/README.md)**. Build with `npm run pages:build` and preview with `npm run pages:preview`.
+
+New separate version: **[Shielded Bitcoin — from notes to a payment](shielded-bitcoin-v2/README.md)** — 34 slides, guided by the protocol teaching sequence of Mastering Zcash and specified by the Shielded Bitcoin paper. Start with the [new presenter script](shielded-bitcoin-v2/presenter-script.md). Run `npm run v2` and open http://localhost:3033. The original `npm run dev` and all earlier versions are preserved.
+
+English BitDevs talk, without equations: **[Shielded Bitcoin — notes, proofs and replay](bitdevs-shielded/README.md)** — 25 minutes plus questions, 26 main slides, 8 Q&A slides and 2 prediction labs. Start with the [presenter script](bitdevs-shielded/presenter-script.md). Run `npm run bitdevs` and open http://localhost:3032.
+
+Interactive course in English: **[From Zcash to Shielded Bitcoin](aula-zcash/README.md)** — 59 screens for self-paced study, with labs and explained answers. Run `npm run study` and open http://localhost:3031.
+
 A 34-slide explanation of the September 2026 proposal: encrypted notes, nullifiers, proofs,
 deterministic replay, wallet recovery and privacy limits. The talk distinguishes the specified
 transfer layer from the unfinished peg, private-fee and deployment work.

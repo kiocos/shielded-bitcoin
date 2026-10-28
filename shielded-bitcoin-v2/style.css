@@ -1,0 +1,179 @@
+/* Shielded Bitcoin — slide chrome
+   Component-level styling lives in UnoCSS utilities and shortcuts (uno.config.ts);
+   this file covers only what utilities cannot reach: the layout background,
+   headings, the click-reveal effect and a handful of keyframe animations */
+:root {
+  --s-bg: #070912;
+  --s-surface: #11142a;
+  --s-violet: #a18cff;
+  --s-violetlt: #cfc4ff;
+  --s-cyan: #4cc9f0;
+  --s-orange: #f7931a;
+  --s-green: #46d9a0;
+  --s-red: #ff6b81;
+  --s-text: #dde1f2;
+  --s-muted: #8a90ae;
+}
+
+.slidev-layout {
+  /* containing block for absolutely-positioned slide furniture */
+  position: relative;
+  background:
+    radial-gradient(900px 560px at 88% -18%, rgba(161, 140, 255, 0.16), transparent 62%),
+    radial-gradient(820px 520px at -12% 112%, rgba(76, 201, 240, 0.10), transparent 60%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.045) 1px, transparent 0) 0 0 / 22px 22px,
+    var(--s-bg);
+  color: var(--s-text);
+  padding: 2.6rem 3.4rem;
+}
+
+/* Headings ---------------------------------------------------------------- */
+.slidev-layout h1 {
+  color: #fff;
+  font-weight: 800;
+  font-size: 2.3rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0;
+}
+.slidev-layout h2 { color: #fff; font-weight: 700; }
+.slidev-layout p { color: var(--s-muted); margin: 0; }
+
+/* Keep titles clear of the mark in the top-right (see slide-top.vue) */
+.slidev-layout:not(.cover):not(.section):not(.center) h1 { padding-right: 9rem; }
+
+/* A short violet-to-cyan rule under every content-slide title */
+.slidev-layout:not(.cover):not(.section):not(.center) h1::after {
+  content: '';
+  display: block;
+  width: 2.8rem;
+  height: 2px;
+  margin-top: 0.7rem;
+  background: linear-gradient(90deg, var(--s-violet), var(--s-cyan), transparent);
+}
+
+/* Cover + section dividers ------------------------------------------------ */
+.slidev-layout.cover, .slidev-layout.section { justify-content: center; }
+.slidev-layout.cover h1 {
+  font-size: 4.1rem;
+  letter-spacing: -0.035em;
+  background: linear-gradient(100deg, #e9e3ff 0%, var(--s-violet) 42%, var(--s-cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.slidev-layout.section h1 {
+  font-size: 3.2rem;
+  background: linear-gradient(100deg, #e9e3ff 0%, var(--s-violet) 60%, var(--s-cyan) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.slidev-layout.section h1::after { display: none; }
+
+/* Code -------------------------------------------------------------------- */
+.slidev-layout code { color: var(--s-violetlt); }
+.slidev-layout pre {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+/* Click reveal ------------------------------------------------------------ */
+/* Everything revealed by v-click comes into focus rather than simply fading
+   in. Blur is a filter, not a transform, so it cannot fight with the
+   translate utilities that position elements on the canvases */
+.slidev-vclick-target {
+  transition: opacity 0.45s ease, filter 0.45s ease !important;
+}
+.slidev-vclick-hidden {
+  filter: blur(5px);
+}
+
+/* The same effect for components, which drive it from a `clicks` prop rather
+   than from v-click: `reveal` always, plus `reveal-off` while hidden */
+.reveal { transition: opacity 0.45s ease, filter 0.45s ease; }
+.reveal-off { opacity: 0; filter: blur(5px); pointer-events: none; }
+
+/* Keyframe animations ----------------------------------------------------- */
+/* Slidev keeps every slide mounted from page load and hides the inactive ones
+   with display:none. That restarts CSS animations, so anything that has to
+   play on *arrival* is a keyframe animation, never a Vue transition keyed to
+   mount — those fire invisibly at startup */
+
+/* A single refusal: the thing rejecting, not a comedy wobble */
+.shake-once { animation: shake-once 0.45s cubic-bezier(.36, .07, .19, .97) both; }
+@keyframes shake-once {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+
+/* Same, for elements centred with translate(-50%, …) */
+.shake-once-centred { animation: shake-once-centred 0.45s cubic-bezier(.36, .07, .19, .97) both; }
+@keyframes shake-once-centred {
+  10%, 90% { transform: translate(calc(-50% - 2px), -50%); }
+  20%, 80% { transform: translate(calc(-50% + 4px), -50%); }
+  30%, 50%, 70% { transform: translate(calc(-50% - 6px), -50%); }
+  40%, 60% { transform: translate(calc(-50% + 6px), -50%); }
+}
+
+/* Something carried over from the previous slide, cleared on arrival */
+.fade-out-on-reveal { animation: fade-out-on-reveal 0.5s ease 0.35s both; }
+@keyframes fade-out-on-reveal { from { opacity: 1; } to { opacity: 0; } }
+
+/* Ciphertext shimmer: a slow violet sheen across encrypted bytes */
+.cipher {
+  background: linear-gradient(100deg, #8f7cf0 20%, #e6dfff 50%, #8f7cf0 80%) 0 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: cipher-sheen 3.2s linear infinite;
+}
+@keyframes cipher-sheen { from { background-position: 125% 0; } to { background-position: -125% 0; } }
+
+/* A gentle breathing glow for the one thing on screen that matters most */
+.glow-pulse { animation: glow-pulse 2.6s ease-in-out infinite; }
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(161, 140, 255, 0.35)); }
+  50% { filter: drop-shadow(0 0 16px rgba(161, 140, 255, 0.75)); }
+}
+
+/* Slidev chrome ----------------------------------------------------------- */
+.slidev-page { scrollbar-width: none; }
+::selection { background: rgba(161, 140, 255, 0.3); }
+
+/* Version 2 keeps one fixed title zone and one evolving diagram zone */
+.slidev-layout:not(.cover):not(.section):not(.center) h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  padding-right: 5.5rem;
+  height: 4.6rem;
+}
+.v2-canvas { margin-top: 1rem; width: 871px; position: relative; }
+.v2-under { text-align: center; font-size: 15px; }
+.v2-cover-sub { font-size: 23px; margin-top: 14px; color: var(--s-text); opacity: 0; animation: v2-cover-in .6s ease 1.2s forwards; }
+.v2-cover-credit { font: 11px 'JetBrains Mono', monospace; margin-top: 38px; color: var(--s-muted); text-transform: uppercase; letter-spacing: .13em; opacity: 0; animation: v2-cover-in .6s ease 1.5s forwards; }
+.v2-cover-edition { font-size: 12px; color: var(--s-muted); margin-top: 14px; opacity: 0; animation: v2-cover-in .6s ease 1.7s forwards; }
+@keyframes v2-cover-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+.v2-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 17px; padding-top: 35px; }
+.v2-check { height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+.v2-check > div { font-size: 44px; }.v2-check > span { font-size: 20px; color: white; }.v2-check > small { font-size: 12px; color: var(--s-muted); }
+.v2-verdicts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; padding-top: 35px; }
+.v2-verdict { height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; }
+.v2-verdict > div { font-size: 46px; }.v2-verdict > span { font-size: 25px; color: white; }.v2-verdict > small { font-size: 14px; color: var(--s-muted); }
+.v2-privacy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.v2-privacy-card { height: 282px; padding: 22px 28px; display: flex; flex-direction: column; gap: 17px; font-size: 19px; }
+.v2-privacy-card > div:first-child { font-size: 32px; }.v2-privacy-card .eyebrow { margin-bottom: 3px; }
+.v2-privacy-legend { position: absolute; left: 590px; top: 52px; width: 281px; display: flex; align-items: flex-start; flex-direction: column; gap: 18px; }
+.v2-privacy-legend small { font-size: 12px; line-height: 1.6; color: var(--s-muted); }
+.v2-costs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding-top: 28px; }
+.v2-cost { height: 238px; padding: 28px 16px; text-align: center; }.v2-number { font: 48px 'JetBrains Mono', monospace; color: white; margin: 32px 0 18px; }.v2-number small { font-size: 20px; color: var(--s-muted); }.v2-cost > div:last-child { font-size: 14px; color: var(--s-muted); }
+.v2-open-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; padding-top: 15px; }.v2-open { height: 135px; padding: 24px; display: flex; align-items: center; gap: 19px; }.v2-open > span { font-size: 34px; flex-shrink: 0; }.v2-open strong { display: block; font-size: 21px; font-weight: 500; color: white; }.v2-open small { display: block; margin-top: 9px; font-size: 12px; color: var(--s-muted); }
+.v2-takeaways { display: flex; flex-direction: column; gap: 34px; padding-top: 30px; }.v2-takeaways > div { display: flex; gap: 28px; align-items: center; padding-bottom: 26px; border-bottom: 1px solid #ffffff12; }.v2-takeaways span { font: 27px 'JetBrains Mono', monospace; }.v2-takeaways > div > div { font-size: 24px; color: white; }
+.v2-end { display: flex; gap: 65px; align-items: center; width: 871px; }.v2-end h1 { font-size: 3.8rem; }.v2-end-links { display: flex; flex-direction: column; gap: 16px; margin-top: 38px; font-size: 15px; color: var(--s-violetlt); }.v2-qr { margin-left: auto; display: flex; flex-direction: column; align-items: center; gap: 15px; color: var(--s-muted); font-size: 13px; }.v2-qr img { width: 180px; height: 180px; padding: 10px; background: white; border-radius: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slidev-layout *, .slidev-layout *::before, .slidev-layout *::after { animation-duration: .001ms !important; animation-delay: 0ms !important; transition-duration: .001ms !important; transition-delay: 0ms !important; }
+}
